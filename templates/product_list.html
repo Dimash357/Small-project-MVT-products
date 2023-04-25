@@ -1,0 +1,36 @@
+{% extends 'components/base.html' %}
+
+{% block content %}
+    <h1>Products</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>${{ product.price }}</td>
+                <td>{{ product.image }}</td>
+                <td></td>
+                <td>
+                    <a href="{% url 'product_edit' product.id %}" class="btn btn-sm btn-primary mr-2">Edit</a>
+                    <a href="{% url 'product_delete' product.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No products available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
